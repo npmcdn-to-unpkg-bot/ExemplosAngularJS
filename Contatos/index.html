@@ -6,50 +6,49 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script type="text/javascript">
           angular
             .module('mainApp', []);
           angular
             .module('mainApp')
-            .controller('contactsController', [
-                    function contactsController() {
-                    const vm = this;
+            .controller('contactsController', [contactsController]);
 
-                    vm.counter = 1;
-                    vm.contacts =  [{id: vm.counter, name: "Marcos Lisboa", age: 25, email: "marcosplisboa@live.com"}];
-                    vm.contact = {id: '', name: "", age: '', email: ""};
+            function contactsController() {
+                const vm = this;
 
-                    vm.save = () => {
-                        if (vm.contact.id) {
-                            for (let index = 0; index < vm.contacts.length; index++) {
-                                if (vm.contact.id === vm.contacts[index].id) {
-                                    vm.contacts[index] = {id: vm.counter, name: vm.contact.name, age: vm.contact.age, email: vm.contact.email};
-                                    break;
-                                }
-                            }
-                        } else {
-                            vm.counter += 1;
-                            vm.contacts.push({id: vm.counter, name: vm.contact.name, age: vm.contact.age, email: vm.contact.email});
-                        }
+                vm.counter = 1;
+                vm.contacts =  [{id: vm.counter, name: "Marcos Lisboa", age: 25, email: "marcosplisboa@live.com"}];
+                vm.contact = {id: '', name: '', age: '', email: ''};
 
-                        vm.contact = {};
-                    };
+                vm.save = () => {
+                  if (vm.contact.id) {
+                      for (let index = 0; index < vm.contacts.length; index++) {
+                          if (vm.contact.id === vm.contacts[index].id) {
+                              vm.contacts[index] = {id: vm.counter, name: vm.contact.name, age: vm.contact.age, email: vm.contact.email};
+                              break;
+                          }
+                      }
+                  } else {
+                      vm.counter += 1;
+                      vm.contacts.push({id: vm.counter, name: vm.contact.name, age: vm.contact.age, email: vm.contact.email});
+                  }
+                  vm.contact = {};
+                };
 
-                    vm.edit = (item) => {
-                       vm.contact.id = item.id;
-                       vm.contact.name = item.name;
-                       vm.contact.age = item.age;
-                       vm.contact.email = item.email;
-                    };
+                vm.edit = (item) => {
+                   vm.contact.id = item.id;
+                   vm.contact.name = item.name;
+                   vm.contact.age = item.age;
+                   vm.contact.email = item.email;
+                };
 
-                    vm.remove = (item) => {
-                       vm.contact.id = item.id;
-                       vm.contact.name = item.name;
-                       vm.contact.age = item.age;
-                       vm.contact.email = item.email;
-                    };
-                }
-             ]);
+                vm.remove = (item) => {
+                  if (item.id) {
+                    vm.contacts = vm.contacts.filter(function(e) { return  e.id !== item.id; });
+                  }
+                };
+            }
         </script>
 
     </head>
