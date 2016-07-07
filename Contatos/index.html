@@ -3,95 +3,75 @@
     <head>
         <title>Angular JS</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="../sources/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-        <script type="text/javascript">
-          angular
-            .module('mainApp', []);
-          angular
-            .module('mainApp')
-            .controller('contactsController', [ function contactsController($scope) {
 
-                $scope.counter = 1;
-                $scope.contacts =  [{
-                    id: $scope.counter, 
-                    name: "Marcos Lisboa", 
-                    age: 25, 
-                    email: "marcosplisboa@live.com"
-                }];
+        <script type="text/javascript" src="../sources/angular.min.js"></script>
+        <script type="text/javascript" src="../sources/underscore-min.js"></script>
 
-                $scope.contact = {id: '', name: '', age: '', email: ''};
-
-                $scope.save function() {
-                  if ($scope.contact.id) {
-                      for (var index = 0; index < $scope.contacts.length; index++) {
-                          if ($scope.contact.id === $scope.contacts[index].id) {
-                            $scope.contacts[index] = {
-                                id: $scope.counter, 
-                                name: $scope.contact.name, 
-                                age: $scope.contact.age, 
-                                email: $scope.contact.email
-                            };
-                            break;
-                          }
-                      }
-                  } else {
-                      $scope.counter += 1;
-                      $scope.contacts.push({id: $scope.counter, name: $scope.contact.name, age: $scope.contact.age, email: $scope.contact.email});
-                  }
-                  $scope.contact = {};
-                };
-
-                $scope.edit = function(item) {
-                   $scope.contact.id = item.id;
-                   $scope.contact.name = item.name;
-                   $scope.contact.age = item.age;
-                   $scope.contact.email = item.email;
-                };
-
-                $scope.remove = function(item) {
-                  if (item.id) {
-                    $scope.contacts = $scope.contacts.filter(function(e) { return  e.id !== item.id; });
-                  }
-                };
-            }
-
-             ]);
-        </script>
-
+        <script type="text/javascript" src="main.js"></script>
+        
     </head>
     <body ng-controller="contactsController">
 
-
+       
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <form class="form-horizontal" name="contactForm">
-                    <fieldset>
+                    <fieldset>                
                         <legend>Contato</legend>
-
+                        
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="name">Name</label>
+                            <label class="col-md-4 control-label" for="name">Name</label>  
                             <div class="col-md-4">
                                 <input ng-model="contact.name" id="name" name="name" type="text" placeholder="Ex: Marcos" class="form-control input-md" required="">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="email">Email</label>
+                            <label class="col-md-4 control-label" for="email">Email</label>  
                             <div class="col-md-4">
-                                <input ng-model="contact.email" id="email" name="email" type="email" placeholder="Ex: marcos@mail.com" class="form-control input-md" required="">
+                                <input ng-model="contact.email" id="email" name="email" type="email" placeholder="Ex: marcos@mail.com" class="form-control input-md" required=""> 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="age">Age</label>
+                            <label class="col-md-4 control-label" for="age">Age</label>  
                             <div class="col-md-4">
                                 <input ng-model="contact.age" id="age" name="age" type="number" placeholder="Ex: 21" class="form-control input-md" required="">
                             </div>
                         </div>
 
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="gender">Gender</label>
+                          <div class="col-md-4"> 
+                            <label class="radio-inline" for="gender-0">
+                              <input type="radio" name="gender" id="gender-0" ng-model="contact.gender" value="M">
+                              Male
+                            </label> 
+                            <label class="radio-inline" for="gender-1">
+                              <input type="radio" name="gender" id="gender-1" ng-model="contact.gender" value="F">
+                              Female
+                            </label>
+                          </div>
+                        </div>
+
+                       <div class="form-group" ng-show="contact.gender == 'F'">
+                          <label class="col-md-4 control-label" for="single">Single</label>
+                          <div class="col-md-4"> 
+                            <label class="radio-inline" for="single-0">
+                              <input type="radio" name="single" id="single-0" ng-model="contact.single" value="true">
+                              Yes
+                            </label> 
+                            <label class="radio-inline" for="single-1">
+                              <input type="radio" name="single" id=" single-1" ng-model="contact.single" value="false">
+                              No
+                            </label>
+                          </div>
+                        </div>
+
+                        
                         <div class="form-group">
                             <label class="col-md-10 control-label" for="save"></label>
                             <div class="col-md-2">
@@ -103,7 +83,7 @@
                 </form>
             </div>
         </div>
-
+                
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <table class="table table-hover">
@@ -115,13 +95,13 @@
                         <th></th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="contact in contacts">
-                            <td><a data-ng-click=".edit(contact)"><i class="fa fa-pencil"></i></a></td>
+                        <tr ng-repeat="contact in contacts" ng-class="{'info': contact.selected}">
+                            <td><a ng-click="edit(contact)"><i class="fa fa-pencil"></i></a></td>
                             <td>{{contact.name}}</td>
                             <td>{{contact.email}}</td>
                             <td>{{contact.age}}</td>
-                            <td><a data-ng-click="remove(contact)"><i class="fa fa-trash"></i></a></td>
-                        </tr>
+                            <td><a ng-click="remove(contact)"><i class="fa fa-trash"></i></a></td>
+                        </tr>    
                     </tbody>
                 </table>
             </div>
