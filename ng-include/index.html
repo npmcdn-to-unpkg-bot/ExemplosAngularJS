@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+    <head>
+        <title>Angular JS</title>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../sources/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <script type="text/javascript" src="../sources/angular.min.js"></script>
+        <script type="text/javascript" src="../sources/underscore-min.js"></script>
+
+        <script type="text/javascript">
+          var app = angular.module('mainApp', []);
+          app.controller('newsController', function newsController($scope) {
+
+            $scope.allNews = new Array({ theme: "Esportes",         content: "esportes1.html" },
+                                       { theme: "Esportes",         content: "esportes2.html" },
+                                       { theme: "Esportes",         content: "esportes3.html" },
+                                       { theme: "Política",         content: "politica1.html" },
+                                       { theme: "Política",         content: "politica2.html" },
+                                       { theme: "Política",         content: "politica3.html" },
+                                       { theme: "Diverção",         content: "diversao1.html" },
+                                       { theme: "Diverção",         content: "diversao2.html" },
+                                       { theme: "Ciência",          content: "ciencia1.html"},
+                                       { theme: "Ciência",          content: "ciencia2.html"});
+
+            $scope.themes = [{ name: "Esportes" }, { name: "Política"},  { name: "Diverção"}, { name: "Ciência"}];
+            $scope.news = [];
+
+            $scope.filterNews = function(){
+              $scope.news = [];
+              if ($scope.selectedTheme){
+                for (var index = 0; index < $scope.allNews.length; index++) {
+                  if ($scope.allNews[index].theme === $scope.selectedTheme.name) {
+                    $scope.news.push($scope.allNews[index]);
+                  }
+                }
+              }
+            }
+            $scope.filterNews();
+          });
+        </script>
+
+    </head>
+    <body ng-controller="newsController">
+
+        <select ng-options="theme.name for theme in themes" ng-model="selectedTheme" ng-change="filterNews()">
+            <option>Selecione...</option>
+        </select>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="new in news">
+                            <div ng-include="new.content"></div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-include="'diversao2.html'"></div>
+    </body>
+</html>
