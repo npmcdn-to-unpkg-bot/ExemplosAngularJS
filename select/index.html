@@ -14,15 +14,35 @@
           var app = angular.module('mainApp', []);
           app.controller('carsController', function carsController($scope) {
                
-            $scope.cars = [{ marca: "Fiat",         modelo: "Palio" },
+            $scope.allCars = new Array({ marca: "Fiat",         modelo: "Palio" },
+                           { marca: "Fiat",         modelo: "Uno" },
+                           { marca: "Fiat",         modelo: "Stilo" },
                            { marca: "Chevrolet",    modelo: "Celta" }, 
+                           { marca: "Chevrolet",    modelo: "Onix" }, 
                            { marca: "Ford",         modelo: "Fiesta" }, 
-                           { marca: "Volkswagem",   modelo: "Gol"}];
+                           { marca: "Ford",         modelo: "Ka" }, 
+                           { marca: "Ford",         modelo: "Fusion" }, 
+                           { marca: "Volkswagen",   modelo: "Gol"},
+                           { marca: "Volkswagen",   modelo: "Tigan"});
 
-            $scope.marcas = [{ name: "Fiat" },
-                             { name: "Chevrolet"}, 
-                             { name: "Ford"}, 
-                             { name: "Volkswagem"}];
+            $scope.marcas = [{ name: "Fiat" }, { name: "Chevrolet"},  { name: "Ford"}, { name: "Volkswagen"}];
+
+            $scope.cars = [];
+
+            $scope.filterCar = function(){
+              $scope.cars = [];
+              if ($scope.selectedCar){
+                for (var index = 0; index < $scope.allCars.length; index++) {
+                  if ($scope.allCars[index].marca === $scope.selectedCar.name) {
+                    $scope.cars.push($scope.allCars[index]);
+                  }
+                }
+              } else {
+                $scope.cars = $scope.allCars;
+              }
+            }
+
+            $scope.filterCar();
 
           });
         </script>
@@ -30,7 +50,7 @@
     </head>
     <body ng-controller="carsController">
 
-        <select ng-options="marca.name for marca in marcas" ng-model="selected">
+        <select ng-options="marca.name for marca in marcas" ng-model="selectedCar" ng-change="filterCar()">
             <option>Selecione...</option>
         </select>
 

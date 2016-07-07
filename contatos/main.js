@@ -86,7 +86,7 @@ app.controller('contactsController', function ($scope){
     }
 
     $scope.sort = function(){
-      $scope.contacts = _.sortBy($scope.contacts, function(item){ return item.name});
+      $scope.contacts = _.sortBy($scope.contacts, function(item){ return item.name; });
     }
-    
+
 }); 
