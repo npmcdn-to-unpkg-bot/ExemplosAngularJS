@@ -92,6 +92,8 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Age</th>
+                        <th>Gender</th>
+                        <th>Single</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -100,6 +102,8 @@
                             <td>{{contact.name}}</td>
                             <td>{{contact.email}}</td>
                             <td>{{contact.age}}</td>
+                            <td>{{contact.gender === 'M'? 'Male' : 'Female'}}</td>
+                            <td>{{contact.single ? 'Yes' : 'No'}}</td>
                             <td><a ng-click="remove(contact)"><i class="fa fa-trash"></i></a></td>
                         </tr>    
                     </tbody>
