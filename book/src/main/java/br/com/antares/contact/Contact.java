@@ -13,29 +13,35 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "t_contact")
 public class Contact implements Serializable, Comparable<Contact> {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @NotEmpty
     @Column
     private String name;
 
+    @NotEmpty
+    @Email
     @Column
     private String email;
-    
+
     @Column
     private String phone;
-    
+
     @Column
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    
+
     @Column
     @Enumerated
     private Gender gender;
@@ -92,11 +98,11 @@ public class Contact implements Serializable, Comparable<Contact> {
     public int compareTo(Contact outher) {
         if (this.id != null && outher != null && outher.id != null) {
             return this.id.compareTo(outher.id);
-        } 
+        }
         return 0;
     }
-    
-    
-    
+
+
+
 
 }

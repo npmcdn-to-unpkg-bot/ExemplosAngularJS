@@ -3,12 +3,16 @@ package br.com.antares.contact;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.antares.util.vo.FilterVO;
 
 @RestController
 @RequestMapping("/api/contacts")
@@ -18,7 +22,8 @@ public class ContactController {
     private ContactRepository repository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Contact> findAll() {
+    public List<Contact> findAll(@Valid FilterVO filter) {
+        filter.getRows();
         return repository.findAll();
     }
 
@@ -28,12 +33,12 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Contact findOne(@PathVariable long id) {
+    public Contact findOne(@PathVariable Long id) {
         return repository.findOne(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Contact update(@PathVariable long id, @RequestBody Contact idea) {
+    public Contact update(@PathVariable Long id, @RequestBody Contact idea) {
         Contact model = repository.findOne(id);
         if (model != null) {
             model.setName(idea.getName());
@@ -47,7 +52,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable Long id) {
         repository.delete(id);
     }
 }
