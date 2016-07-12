@@ -1,0 +1,47 @@
+<div class="col-md-6 col-md-offset-3">
+<br />
+<fieldset>
+    <legend>Contatos</legend>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-4">
+                <input ng-model="contatcFilter.name" type="text" class="form-control input-md" placeholder="Filter Name">
+            </div>
+            <div class="col-md-4">
+                <input ng-model="contatcFilter.email" type="text" class="form-control input-md" placeholder="Filter E-mail">
+            </div>
+            <div class="col-md-4">
+                <input ng-model="contatcFilter.age" type="text" class="form-control input-md" placeholder="Filter Age">
+            </div>
+        </div>
+    </form>
+    <hr />
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <th></th>
+            <th><a ng-click="sort('name')">Name</a></th>
+            <th><a ng-click="sort('email')">Email</a></th>
+            <th><a ng-click="sort('age')">Age</a></th>
+            <th><a ng-click="sort('gender')">Gender</a></th>
+            <th><a ng-click="sort('single')">Single</a></th>
+            <th><a ng-click="sort('ammount')">Ammount</a></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contact in contacts | filter: contatcFilter | orderBy:fieldFilter:ascFilter" ng-class="{'info': contact.selected}">
+                <td><a ng-click="edit(contact)"><i class="fa fa-pencil"></i></a></td>
+                <td>{{contact.name}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.age | number: 0}}</td>
+                <td>{{contact.gender === 'M'? 'Male' : 'Female'}}</td>
+                <td>{{contact.single ? 'Yes' : 'No'}}</td>
+                <td>{{contact.ammount | currency}}</td>
+                <td>{{contact.birthday | date: 'dd/MM'}}</td>
+                <td><a ng-click="remove(contact)"><i class="fa fa-trash"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="col-md-1"></div>
+</fieldset>>
