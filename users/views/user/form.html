@@ -1,0 +1,64 @@
+<div class="col-md-6 col-md-offset-3">
+    <form class="form-horizontal" name="userForm">
+        <fieldset>
+            <legend>Editar Usuario</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Name</label>
+                <div class="col-md-4">
+                    <input ng-model="user.name" id="name" name="name" type="text" placeholder="Ex: Marcos" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input ng-model="user.email" id="email" name="email" type="email" placeholder="Ex: marcos@mail.com" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="age">Age</label>
+                <div class="col-md-4">
+                    <input ng-model="user.age" id="age" name="age" type="number" placeholder="Ex: 21" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="gender">Gender</label>
+              <div class="col-md-4">
+                <label class="radio-inline" for="gender-0">
+                  <input type="radio" name="gender" id="gender-0" ng-model="user.gender" value="M">
+                  Male
+                </label>
+                <label class="radio-inline" for="gender-1">
+                  <input type="radio" name="gender" id="gender-1" ng-model="user.gender" value="F">
+                  Female
+                </label>
+              </div>
+            </div>
+
+           <div class="form-group" ng-show="user.gender == 'F'">
+              <label class="col-md-4 control-label" for="single">Single</label>
+              <div class="col-md-4">
+                <label class="radio-inline" for="single-0">
+                  <input type="radio" name="single" id="single-0" ng-model="user.single" value="true">
+                  Yes
+                </label>
+                <label class="radio-inline" for="single-1">
+                  <input type="radio" name="single" id=" single-1" ng-model="user.single" value="false">
+                  No
+                </label>
+              </div>
+            </div>
+
+             <div class="form-group">
+               <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <button ng-click="save()" ng-disabled="userForm.$invalid" id="save" name="save" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+{
+  "logging": {
+    "console": {
+      "level": "debug",
+      "silent": false,
+      "colorize": true,
+      "timestamp": false,
+      "json": false,
+      "prettyPrint": true
+    },
+    "file": {
+      "level": "info",
+      "silent": false,
+      "colorize": true,
+      "timestamp": true,
+      "filename": "log/ex-api",
+      "maxsize": "100000000",
+      "datePattern": "-yyyy-MM-dd.log",
+      "json": false,
+      "prettyPrint": true
+    },
+    "exception": {
+      "level": "error",
+      "silent": false,
+      "colorize": true,
+      "timestamp": true,
+      "filename": "log/ex-api-exception",
+      "maxsize": "100000000",
+      "datePattern": "-yyyy-MM-dd.log",
+      "json": false,
+      "prettyPrint": true,
+      "humanReadableUnhandledException": true
+    }
+  },
+
+  "server": {
+    "prefix": "",
+    "port": 4058
+  }
+}
